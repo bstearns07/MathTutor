@@ -228,7 +228,7 @@ Average Correct:    75%
 ```
 
 # <u>*Maintainers*</u>
-[@jay259](https://github.com/jay259) Javion Wilkins <br>
+[@JayW259](https://github.com/JayW259) Javion Wilkins <br>
 [@bstearns07](https://github.com/bstearns07) Ben Stearns
 
 [Back to Top](#math-tutor-v5)
