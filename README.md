@@ -3,7 +3,7 @@ https://github.com/lifeparticle/Markdown-Cheatsheet
 https://youtu.be/eVGEea7adDM?si=cz1Fbqxr9VgioIEh
 -->
 
-# Math Tutor V5
+# Math Tutor V6
 
 <b>Table of Contents</b>
 - [Summary](#summary)
@@ -18,7 +18,7 @@ https://youtu.be/eVGEea7adDM?si=cz1Fbqxr9VgioIEh
 
 # <u>*Summary*</u>
 
-Welcome to Math Tutor Version 5!
+Welcome to Math Tutor Version 6!
 --------------------------------
 This is a fun program to test your math skills with some randomly generated math questions.
 Do super well and you can level up to harder problems!
@@ -231,4 +231,4 @@ Average Correct:    75%
 [@JayW259](https://github.com/JayW259) Javion Wilkins <br>
 [@bstearns07](https://github.com/bstearns07) Ben Stearns
 
-[Back to Top](#math-tutor-v5)
+[Back to Top](#math-tutor-v6)
