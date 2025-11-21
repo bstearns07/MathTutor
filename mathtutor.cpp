@@ -1,9 +1,9 @@
 /**********************************************************************************************************************
 Program...........: Math Tutor V5
-Programmers.......: Ben Stearns, Gavin Johnson
-Date..............: 11-7-25
+Programmers.......: Ben Stearns, Javion Wilkins
+Date..............: 11-21-25
 Section...........: Section 3 – 12:00 pm
-GitHub Repo.......: https://github.com/bstearns07/MathTutorV5
+GitHub Repo.......: https://github.com/bstearns07/MathTutorV6
 Description.......: The purpose of this program is to:
                         - Display a fun welcome banner with funny math jokes
                         - Ask for the user's name and greet them
@@ -17,7 +17,9 @@ Description.......: The purpose of this program is to:
                         - When the player is done playing, a final report is generated with the following:
                             - Displays how the player did on each question
                             - Displays total number of question correct, incorrect, and % correct
-                        -(new) Necessary program functions are encapsulated into separate header and definition files
+                        - Necessary program functions are encapsulated into separate header and definition files
+                        - (new) Support for saving and loading game progress
+                            - (new) Saving/Loading game progress is validated through try/catch logic
 File Description...: defines the functions required for the application
 ***********************************************************************************************************************/
 

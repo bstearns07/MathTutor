@@ -25,19 +25,22 @@ Do super well and you can level up to harder problems!
 Be careful though. Get too many wrong and you might level down. Give it a try!
 
 How does it work? Here's what this program does:
-- Displays a fun welcome banner with funny math jokes
-- Asks for your name so it knows who you are!
-- Uses random generation to produce a math problem for you to solve
-- You get 3 attempts to answer the question correctly
-- After each question, you get the choice of whether to continue playing
-- If you get 3 questions correct you level up to harder problems!
-- But if you run out of attempts 3 times first then you level down to simpler problems (Level 1 is the lowest)
-- Validates all answers are numeric and whether you give a valid response to continue playing (upper or lower case is fine!)
-- Uses vectors to store information on each question's statistics
-- Displays a summary report once the user is done to include the following:
-    - How the user did on each question
-    - Calculates total number of question correct, incorrect, and % correct
-- (new) Necessary program functions are encapsulated into separate header and definition files
+The purpose of this program is to:
+- Display a fun welcome banner with funny math jokes
+- Ask for the user's name and greet them
+- Use random generation to produce a math problem for the user to solve
+- Give the user 3 attempts to answer the question correctly
+- Asks if the user wishes to continue after each question
+- Levels up to harder problems after 3 correct answers
+- Levels down to easier problems after 3 incorrect answers if applicable
+- Validates that answers are numeric and if user enters a valid wish to continue
+- Uses vectors to store statistics on each question asked
+- When the player is done playing, a final report is generated with the following:
+    - Displays how the player did on each question
+    - Displays total number of question correct, incorrect, and % correct
+- Necessary program functions are encapsulated into separate header and definition files
+- (new) Support for saving and loading game progress
+    - (new) Saving/Loading game progress is validated through try/catch logic
 
 # <u>*Screenshots*</u>
 
@@ -225,7 +228,7 @@ Average Correct:    75%
 ```
 
 # <u>*Maintainers*</u>
-[@gajohn07](https://github.com/gajohn07) Gavin Johnson <br>
+[@jay259](https://github.com/jay259) Javion Wilkins <br>
 [@bstearns07](https://github.com/bstearns07) Ben Stearns
 
 [Back to Top](#math-tutor-v5)
