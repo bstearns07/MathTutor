@@ -212,7 +212,7 @@ bool GiveThreeAttempts(string username, vector<int> &currentQuestion) {
                                  /   \
                                  |    \
                                  || (__V)" << endl;
-            cout << "\t\t\t\t*happy tail wags*" << endl;
+            cout << "\t\t\t\t*happy tail wags*" << endl << endl;
             currentQuestion.push_back(i);
             isCorrect = true;
             break; //exit loop on correct answer
@@ -229,7 +229,7 @@ bool GiveThreeAttempts(string username, vector<int> &currentQuestion) {
                                  /   \
                                  |    \
                                  || (__V)" << endl;
-                cout << "\t\t\t\t*sad puppy noises*" << endl;
+                cout << "\t\t\t\t*sad puppy noises*" << endl << endl;
                 currentQuestion.push_back(0);
                 isCorrect = false;
             }
@@ -288,7 +288,7 @@ string YesNoQuestion(string question) {
 
     //ask whether the user wishes to continue
     while (true) {
-        cout << "\nDo you want to continue? (y= yes | n=no) ";
+        cout << question;
         getline(cin, userInput);
         for (char & i : userInput) //cast all characters to lower case
             i = tolower(i);
@@ -298,7 +298,7 @@ string YesNoQuestion(string question) {
             break;
         //if the user entered an invalid value, output the result & allow loop to continue
         else {
-            cout << "\tInvalid input, please try again...";
+            cout << "\tInvalid input, please try again..." << endl;
         }
     } //end validating if user wishes to continue
     return userInput;
@@ -365,8 +365,8 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) 
     ofstream outFS;
 
     //ask if the user wishes to save their game and store their response
-    cout << username;
-    userInput = YesNoQuestion(", would you like to save your game?");
+    cout << endl << username;
+    userInput = YesNoQuestion(", would you like to save your game? (y=yes | n=no): ");
 
     //if user responded "no", display game save was cancelled and return from the function
     if (userInput == "n" || userInput == "no") {
@@ -375,7 +375,7 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) 
     }
 
     //display that  the game is being saved, open the file, and throw an exception if the file failed to open
-    cout << "Saving game. Please wait...";
+    cout << "Saving game. Please wait..." << endl;
     outFS.open(FILE_NAME);
     if (!outFS.is_open()) {
         throw runtime_error("Could not open file " + FILE_NAME + " for writing");
@@ -389,13 +389,13 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) 
         << allQuestions.at(i).at(3) << " "
         << allQuestions.at(i).at(4) << " "
         << allQuestions.at(i).at(5) << " "
-        << allQuestions.at(i).at(6)
         << endl;
     }
 
     //close the file and display how many questions were saved
     outFS.close();
-    cout << allQuestions.size() << " questions saved" << endl;
+    cout << allQuestions.size() << " questions saved to " << FILE_NAME << endl;
+    cout << "Game saved successfully." << endl;
 }
 
 /**********************************************************************************************************************
