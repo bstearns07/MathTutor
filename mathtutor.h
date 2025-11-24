@@ -111,7 +111,24 @@ string YesNoQuestion(string question);
  */
 void DisplaySummaryReport(const vector<vector<int> > &allQuestions);
 
-void SaveCurentGame(string username, const vector<vector<int> > &allQuestions);
+/**
+ * @brief Saves the user's game progress to a text file
+ *
+ * This function asks the user if they wish to save their game
+ * If user responds "yes" write the results of all their questions to a text file
+ *
+ * @return void
+ */
+void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions);
 
+/**
+ * @brief Attempts to load the data stored in the saved data file
+ *
+ * This function checks to see if a saved data file exists. If not, the program proceeds as a new game
+ * If the saved data file exists, asks if the user wished to load the data
+ * If user chooses to load the saved data, all the file's contents are returned by reference to the calling function
+ *
+ * @return void
+ */
 int LoadPreviousGame(string username, vector<vector<int>>&allQuestions);
 #endif //MATHTUTOR_H

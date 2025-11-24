@@ -45,7 +45,7 @@ int main() {
     int totalIncorrect                  = 0;    //keeps track of how many question the user got incorrect
     int mathLevel                       = 1;    //current difficulty level
     bool isCorrect = false;                     //for storing whether the user got a question right or wrong
-    SetConsoleOutputCP(CP_UTF8);    //sets the console output code page to UTF-8 for better ascii art
+    SetConsoleOutputCP(CP_UTF8);     //sets the console output code page to UTF-8 for better ascii art
     srand(time(0));                        //seeds random number generation using the system clock time
 
 
@@ -86,7 +86,7 @@ int main() {
     //use the 2d vector to display the final summary report
     DisplaySummaryReport(allQuestions);
     try {
-        SaveCurentGame(username, allQuestions);
+        SaveCurrentGame(username, allQuestions);
     }
     catch (runtime_error &e) {
         cout<< endl << e.what() << endl;

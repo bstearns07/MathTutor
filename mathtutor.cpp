@@ -24,16 +24,16 @@ File Description...: defines the functions required for the application
 ***********************************************************************************************************************/
 
 //import required code for the file
-using namespace std;
-#include <cctype>
-#include <cstdlib>
-#include <iomanip>
-#include <iostream>
-#include <limits>
-#include <string>
-#include <vector>
-#include <fstream>
-#include <stdexcept>
+using namespace std;    //so fully-qualified statements aren't needed for cout's and cin's
+#include <cctype>       //to allow for character functions like tolower()
+#include <cstdlib>      //used to add random numbers
+#include <iomanip>      //to allow use setw() operations
+#include <iostream>     //used to allow for console input, output, and left/right alignment
+#include <limits>       //to allow validating a user's input as numeric up to the stream limit
+#include <string>       //to allow for string use and manipulation
+#include <vector>       //to allow the use of vector data containers
+#include <fstream>      //to allow for file input/output streams
+#include <stdexcept>    //to allow throwing runtime exceptions
 
 //global variables required for some functions to run
 const int MAX_ATTEMPTS = 3;
@@ -356,9 +356,10 @@ void DisplaySummaryReport(const vector<vector<int> > &allQuestions) {
 }
 
 /**********************************************************************************************************************
-* Save game function
+* Asks the user if they wish to save their game. If so, the results of all the user's question are written to a file
+* Returns void
 **********************************************************************************************************************/
-void SaveCurentGame(string username, const vector<vector<int> > &allQuestions) {
+void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) {
     //define required function variables
     string userInput = "?";
     ofstream outFS;
@@ -373,8 +374,7 @@ void SaveCurentGame(string username, const vector<vector<int> > &allQuestions) {
         return;
     }
 
-    //proceed with saving the game logic if user didn't enter no
-    //display saving game, open the file, and if file failed to open throw an exception
+    //display that  the game is being saved, open the file, and throw an exception if the file failed to open
     cout << "Saving game. Please wait...";
     outFS.open(FILE_NAME);
     if (!outFS.is_open()) {
@@ -397,24 +397,31 @@ void SaveCurentGame(string username, const vector<vector<int> > &allQuestions) {
     outFS.close();
     cout << allQuestions.size() << " questions saved" << endl;
 }
+
+/**********************************************************************************************************************
+* Attempts to load the game's saved data file. If it doesn't exist, display they are a new user and return from fuction
+* If file exists, load the data from within the file as a vector and return the data.
+* Throw an exception if file fails to load
+* Returns void
+**********************************************************************************************************************/
 void LoadPredictedGame(string username, vector<vector<int> > &allQuestions) {
     ifstream inFS;
-    string userInput = "?";
-    int leftNumber =0;
-    int rightNumber = 0;
-    int mathLevel = 0;
-    int mathSymbol = 0;
-    int correctAnswer=0;
-    int attempts = 0;
+    string userInput    = "?";
+    int leftNumber      = 0;
+    int rightNumber     = 0;
+    int mathLevel       = 0;
+    int mathSymbol      = 0;
+    int correctAnswer   = 0;
+    int attempts        = 0;
 
     inFS.open(FILE_NAME);
 
     if(!inFS.is_open()) {
-        cout << " You havn't played this game before goodluck on your new game"
+        cout << "You haven't played this game before good luck on your new game"
         << endl;
         return;
     }
-    userInput = YesNoQuestion("Would you like to load your previous game");
+    userInput = YesNoQuestion("Would you like to load your previous game?");
     if(userInput == "n" || "no"){
         cout<<"You have cancelled the load"<<endl;
         return;
