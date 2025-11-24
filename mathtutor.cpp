@@ -397,3 +397,27 @@ void SaveCurentGame(string username, const vector<vector<int> > &allQuestions) {
     outFS.close();
     cout << allQuestions.size() << " questions saved" << endl;
 }
+void LoadPredictedGame(string username, vector<vector<int> > &allQuestions) {
+    ifstream inFS;
+    string userInput = "?";
+    int leftNumber =0;
+    int rightNumber = 0;
+    int mathLevel = 0;
+    int mathSymbol = 0;
+    int correctAnswer=0;
+    int attempts = 0;
+
+    inFS.open(FILE_NAME);
+
+    if(!inFS.is_open()) {
+        cout << " You havn't played this game before goodluck on your new game"
+        << endl;
+        return;
+    }
+    userInput = YesNoQuestion("Would you like to load your previous game");
+    if(userInput == "n" || "no"){
+        cout<<"You have cancelled the load"<<endl;
+        return;
+    }
+
+}

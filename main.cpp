@@ -32,6 +32,7 @@ File Description...: defines the main function to run the application
 #include <vector>       //to allow us to use vectors
 #include <iomanip>      //to allow use setw() operations
 #include "mathtutor.h"  //to import the functions required for the app to run
+#include <stdexcept>
 using namespace std;    //so fully-qualified statements aren't needed for cout's and cin's
 
 //Begin main function of the program
@@ -47,11 +48,13 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);    //sets the console output code page to UTF-8 for better ascii art
     srand(time(0));                        //seeds random number generation using the system clock time
 
+
     //Display Game's Intro
     DisplayGameIntro();
 
     //ask for the user's name, store the response, and greet them
     username = GetUsersName();
+
 
     //keep generating and asking user math questions while they wish to continue with the program as a do/while loop
     do {
@@ -82,6 +85,12 @@ int main() {
 
     //use the 2d vector to display the final summary report
     DisplaySummaryReport(allQuestions);
+    try {
+        SaveCurentGame(username, allQuestions);
+    }
+    catch (runtime_error &e) {
+        cout<< endl << e.what() << endl;
+    }
 
     //say goodbye to the user
     cout << R"(

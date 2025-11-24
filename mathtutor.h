@@ -112,4 +112,6 @@ string YesNoQuestion(string question);
 void DisplaySummaryReport(const vector<vector<int> > &allQuestions);
 
 void SaveCurentGame(string username, const vector<vector<int> > &allQuestions);
+
+int LoadPreviousGame(string username, vector<vector<int>>&allQuestions);
 #endif //MATHTUTOR_H
