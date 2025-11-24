@@ -32,10 +32,13 @@ using namespace std;
 #include <limits>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <stdexcept>
 
 //global variables required for some functions to run
 const int MAX_ATTEMPTS = 3;
 const int LEVEL_RANGE = 10;
+const string FILE_NAME = "mathtutor.txt";
 
 /**********************************************************************************************************************
  * Displays the program intro and jokes
@@ -280,7 +283,7 @@ void CheckForLevelChange(int &totalCorrect, int &totalIncorrect, int &mathLevel)
  * Asks the user if they want to play again. Loops until either y/yes/n/no is entered
  * Returns the user's wish to continue as a string "y/yes/n/no"
  *********************************************************************************************************************/
-string AskToPlayAgain(string username) {
+string YesNoQuestion(string question) {
     string userInput = "?";//stores the user's wish to continue
 
     //ask whether the user wishes to continue
@@ -350,4 +353,47 @@ void DisplaySummaryReport(const vector<vector<int> > &allQuestions) {
     cout << "Total Correct:   " << setw(5) << right << totalCorrect << endl;
     cout << "Total Incorrect: " << setw(5) << right << totalIncorrect << endl;
     cout << "Average Correct: " << setw(5) << right << totalCorrect * 100 / allQuestions.size() << "%" << endl;
+}
+
+/**********************************************************************************************************************
+* Save game function
+**********************************************************************************************************************/
+void SaveCurentGame(string username, const vector<vector<int> > &allQuestions) {
+    //define required function variables
+    string userInput = "?";
+    ofstream outFS;
+
+    //ask if the user wishes to save their game and store their response
+    cout << username;
+    userInput = YesNoQuestion(", would you like to save your game?");
+
+    //if user responded "no", display game save was cancelled and return from the function
+    if (userInput == "n" || userInput == "no") {
+        cout << "Save game cancelled";
+        return;
+    }
+
+    //proceed with saving the game logic if user didn't enter no
+    //display saving game, open the file, and if file failed to open throw an exception
+    cout << "Saving game. Please wait...";
+    outFS.open(FILE_NAME);
+    if (!outFS.is_open()) {
+        throw runtime_error("Could not open file " + FILE_NAME + " for writing");
+    }
+
+    //if file opened successfully, write the contents of the vector to the file
+    for(int i = 0; i < allQuestions.size(); i++) {
+        outFS << allQuestions.at(i).at(0) << " "
+        << allQuestions.at(i).at(1) << " "
+        << allQuestions.at(i).at(2) << " "
+        << allQuestions.at(i).at(3) << " "
+        << allQuestions.at(i).at(4) << " "
+        << allQuestions.at(i).at(5) << " "
+        << allQuestions.at(i).at(6)
+        << endl;
+    }
+
+    //close the file and display how many questions were saved
+    outFS.close();
+    cout << allQuestions.size() << " questions saved" << endl;
 }

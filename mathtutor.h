@@ -92,14 +92,14 @@ bool GiveThreeAttempts(string username, vector<int> &currentQuestion);
 void CheckForLevelChange(int &totalCorrect, int &totalIncorrect, int &mathLevel);
 
 /**
- * @brief Asks the user if they wish to keep playing
+ * @brief Asks the user a yes/no question (such as wish to continue or save/load game)
  *
- * Asks the user to enter y/yes or n/no for whether they wish to continue playing
+ * Asks the user to enter y/yes or n/no to a question
  * Validates that y/yes or n/no is typed
  *
- * @return string: Whether the user wishes to continue as "y/yes/n/no"
+ * @return string: Whether the user's answer to a question as ' "y/yes/n/no"
  */
-string AskToPlayAgain(string username);
+string YesNoQuestion(string question);
 
 /**
  * @brief Prints the final summary report for the user's time spent playing
@@ -110,4 +110,6 @@ string AskToPlayAgain(string username);
  * @return void
  */
 void DisplaySummaryReport(const vector<vector<int> > &allQuestions);
+
+void SaveCurentGame(string username, const vector<vector<int> > &allQuestions);
 #endif //MATHTUTOR_H

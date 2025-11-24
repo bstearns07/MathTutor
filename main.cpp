@@ -75,7 +75,7 @@ int main() {
         getline(cin, userInput); // clears the new line from the input buffer
 
         //ask if the user wants to continue and store their input
-        userInput = AskToPlayAgain(username);
+        userInput = YesNoQuestion(username);
 
     } while (userInput == "yes" || userInput == "y");
     //end of do/while loop for user's wish to continue with the program
