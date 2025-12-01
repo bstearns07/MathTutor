@@ -14,6 +14,8 @@ https://youtu.be/eVGEea7adDM?si=cz1Fbqxr9VgioIEh
     - [Level Up](#level-up)
     - [Level Down](#level-down)
     - [Final Report](#final-report)
+    - [Loading/Saving Game Progress](#loadingsaving-game-progress)
+    - [Loading Game Error Handling](#loading-game-error-handling)
 - [Maintainers](#maintainers)
 
 # <u>*Summary*</u>
@@ -224,6 +226,51 @@ Total Questions:     4
 Total Correct:       3
 Total Incorrect:     3
 Average Correct:    75%
+
+```
+
+## Loading/Saving Game Progress
+```
+What is your name? Ben
+Welcome Ben to the Silly Simple Math Tutor!
+
+                                 /^ ^\
+                                / 0 0 \
+                                V\ ‿ /V
+                                 /   \
+                                 |    \
+                                 || (__V
+My name is Digit the dog, and I'll be your math tutor!
+Would you like to load the previous game that was played (y=yes | n=no)?: y
+Attempting to load game please wait
+1 have been loaded from the file
+
+[Level #1] Ben, what is 2 * 7 =
+
+Ben, would you like to save your game? (y=yes | n=no): y
+Saving game. Please wait...
+4 questions saved to mathtutor.txt
+Game saved successfully.
+
+                                 /^ ^\
+                                / 0 0 \
+                                V\ ‿ /V
+                                 /   \
+                                 |    \
+                                 || (__V
+[Digit:] Thanks for playing the silly simple math tutor Ben!
+
+Process finished with exit code 0
+
+```
+## Loading Game Error Handling
+```
+Would you like to load the previous game that was played (y=yes | n=no)?: y
+Attempting to load game please wait
+
+Could not read the entire file mathtutor.txt for loading
+
+[Level #1] Ben, what is 6 / 3 =
 
 ```
 

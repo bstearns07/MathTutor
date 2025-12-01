@@ -55,6 +55,8 @@ int main() {
     //ask for the user's name, store the response, and greet them
     username = GetUsersName();
 
+    //check if save data exists. If so, ask if the user wishes to load the data or start a new game. If yes, load data
+    //catch any runtime errors that occur
     try {
         mathLevel = LoadPreviousGame(username, allQuestions);
     }
@@ -62,7 +64,6 @@ int main() {
         cout<< endl;
         cout<<e.what()<<endl;
     }
-
 
     //keep generating and asking user math questions while they wish to continue with the program as a do/while loop
     do {

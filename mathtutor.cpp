@@ -405,37 +405,49 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) 
 * Returns void
 **********************************************************************************************************************/
 int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
-    ifstream inFS;
-    string userInput    = "?";
-    int leftNumber      = 0;
-    int rightNumber     = 0;
-    int mathLevel       = 0;
-    int mathSymbol      = 0;
-    int correctAnswer   = 0;
-    int attempts        = 0;
 
+    //define the required function variables
+    ifstream inFS;              //for reading data from the save file
+    string userInput    = "?";  //for storing the user's response to yes/no questions
+    int leftNumber      = 0;    //for storing the left number in a math question
+    int rightNumber     = 0;    //for storing the right number in a math question
+    int mathLevel       = 0;    //for storing the user's math level
+    int mathSymbol      = 0;    //for storing a math question's symbol of operation (addition/subtraction etc.)
+    int correctAnswer   = 0;    //for storing the correct answer to a question
+    int attempts        = 0;    //for storing the number of attempts it took to answer a question
+
+    //open the save file
     inFS.open(FILE_NAME);
 
+    //if the save file failed to open, assume it's a new game and return a starting math level of 1
     if(!inFS.is_open()) {
-        cout << username << ", looks like you haven't played this game before good luck on your new game"
-        << endl;
+        cout << username << ", looks like you haven't played this game before good luck on your new game" << endl;
         return 1;
     }
-    userInput = YesNoQuestion("Would you like to load your previous game?");
-    if(userInput == "n" || userInput=="no"){
-        cout<<"You have cancelled the load"<<endl;
-        return 1;
-    }
-    cout<<"Attempting to load game please wait"<<endl;
 
+    //if the save file exists, ask if the user wants to load the previous game
+    userInput = YesNoQuestion("Would you like to load the previous game that was played (y=yes | n=no)?: ");
+
+    //if user doesn't want to load the save data, start a new game by returning a beginning math level of 1
+    if(userInput == "n" || userInput=="no"){
+        cout<<"You have cancelled the load. Starting a new game" << endl;
+        return 1;
+    }
+
+    //if user chose to load the save data, read the file one line at a time and append data to vector of questions
+    cout<<"Attempting to load game please wait"<<endl;
     while(inFS>> mathLevel>>leftNumber>> mathSymbol>> rightNumber>> correctAnswer>> attempts) {
         allQuestions.push_back({mathLevel,leftNumber,mathSymbol,rightNumber,correctAnswer,attempts});
     }
+
+    //if the save file was not read all the way to the end of the file, clear the file's data and throw an exception
     if(!inFS.eof()) {
         allQuestions.clear();
         throw runtime_error("Could not read the entire file " + FILE_NAME + " for loading");
     }
+
+    //close the save file and display how many questions were loaded
     inFS.close();
-    cout<<allQuestions.size() << " have been loaded from the file" << endl;
+    cout << allQuestions.size() << " have been loaded from the file" << endl;
     return mathLevel;
 }
