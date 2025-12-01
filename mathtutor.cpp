@@ -150,9 +150,9 @@ vector<int> GenerateRandomQuestion(int mathLevel) {
         default: //error message
             //displayed if math type is outside the valid values 1-4
             cout << "Invalid math type: " << mathType << endl;
-            cout << "Please report this error to Gavin Johnson or Ben Stearns" << endl;
+            cout << "Please report this error to Javion Wilkins or Ben Stearns" << endl;
             cout << "Error code -1";
-            exit(-1);
+            throw runtime_error("Invalid math type" + mathType);
     }
     return {mathLevel, leftNumber, mathSymbol, rightNumber, correctAnswer};
 }
@@ -404,7 +404,7 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) 
 * Throw an exception if file fails to load
 * Returns void
 **********************************************************************************************************************/
-void LoadPredictedGame(string username, vector<vector<int> > &allQuestions) {
+int LoadPredictedGame(string username, vector<vector<int> > &allQuestions) {
     ifstream inFS;
     string userInput    = "?";
     int leftNumber      = 0;
@@ -419,12 +419,22 @@ void LoadPredictedGame(string username, vector<vector<int> > &allQuestions) {
     if(!inFS.is_open()) {
         cout << "You haven't played this game before good luck on your new game"
         << endl;
-        return;
+        return 1;
     }
     userInput = YesNoQuestion("Would you like to load your previous game?");
-    if(userInput == "n" || "no"){
+    if(userInput == "n" || userInput=="no"){
         cout<<"You have cancelled the load"<<endl;
-        return;
+        return 1;
     }
+    cout<<"Attempting to load game please wait"<<endl;
 
+    while(inFS>> mathLevel>>leftNumber>> mathSymbol>> rightNumber>> correctAnswer>> attempts) {
+        allQuestions.push_back({mathLevel,leftNumber,mathSymbol,rightNumber,correctAnswer,attempts});
+    }
+    if(!inFS.eof()) {
+        throw runtime_error("Could not open file " + FILE_NAME + " for loading");
+    }
+    inFS.close();
+    cout<<allQuestions.size() << " have been loaded from the file" << endl;
+    return mathLevel;
 }

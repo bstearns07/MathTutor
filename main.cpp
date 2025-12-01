@@ -55,12 +55,28 @@ int main() {
     //ask for the user's name, store the response, and greet them
     username = GetUsersName();
 
+    try {
+        mathLevel = LoadPreviousGame(username, allQuestions);
+    }
+    catch(runtime_error& e) {
+        cout<< endl;
+        cout<<e.what()<<endl;
+    }
+
 
     //keep generating and asking user math questions while they wish to continue with the program as a do/while loop
     do {
         //generate a random math question based on the user's mathLevel and store as a vector
         vector<int> currentQuestion = GenerateRandomQuestion(mathLevel);
 
+        try {
+            currentQuestion = GenerateRandomQuestion(mathLevel);
+        }
+        catch(runtime_error& except) {
+            cout<< endl;
+            cout<< except.what()<<endl;
+            return -1;
+        }
         //give the user up to 3 attempts to answer the random question. Store whether they got it right or wrong
         isCorrect = GiveThreeAttempts(username, currentQuestion);
 
