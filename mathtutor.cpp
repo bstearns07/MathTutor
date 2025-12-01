@@ -404,7 +404,7 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) 
 * Throw an exception if file fails to load
 * Returns void
 **********************************************************************************************************************/
-int LoadPredictedGame(string username, vector<vector<int> > &allQuestions) {
+int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
     ifstream inFS;
     string userInput    = "?";
     int leftNumber      = 0;
