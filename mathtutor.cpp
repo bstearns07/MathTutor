@@ -417,7 +417,7 @@ int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
     inFS.open(FILE_NAME);
 
     if(!inFS.is_open()) {
-        cout << "You haven't played this game before good luck on your new game"
+        cout << username << ", looks like you haven't played this game before good luck on your new game"
         << endl;
         return 1;
     }
@@ -432,7 +432,8 @@ int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
         allQuestions.push_back({mathLevel,leftNumber,mathSymbol,rightNumber,correctAnswer,attempts});
     }
     if(!inFS.eof()) {
-        throw runtime_error("Could not open file " + FILE_NAME + " for loading");
+        allQuestions.clear();
+        throw runtime_error("Could not read the entire file " + FILE_NAME + " for loading");
     }
     inFS.close();
     cout<<allQuestions.size() << " have been loaded from the file" << endl;
