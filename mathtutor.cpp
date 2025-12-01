@@ -370,15 +370,15 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) 
 
     //if user responded "no", display game save was cancelled and return from the function
     if (userInput == "n" || userInput == "no") {
-        cout << "Save game cancelled";
+        cout << "\tSave game cancelled";
         return;
     }
 
     //display that  the game is being saved, open the file, and throw an exception if the file failed to open
-    cout << "Saving game. Please wait..." << endl;
+    cout << "\tSaving game. Please wait..." << endl;
     outFS.open(FILE_NAME);
     if (!outFS.is_open()) {
-        throw runtime_error("Could not open file " + FILE_NAME + " for writing");
+        throw runtime_error("\tCould not open file " + FILE_NAME + " for writing");
     }
 
     //if file opened successfully, write the contents of the vector to the file
@@ -394,8 +394,8 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) 
 
     //close the file and display how many questions were saved
     outFS.close();
-    cout << allQuestions.size() << " questions saved to " << FILE_NAME << endl;
-    cout << "Game saved successfully." << endl;
+    cout << "\t" << allQuestions.size() << " questions saved to " << FILE_NAME << endl;
+    cout << "\tGame saved successfully." << endl;
 }
 
 /**********************************************************************************************************************
@@ -435,7 +435,7 @@ int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
     }
 
     //if user chose to load the save data, read the file one line at a time and append data to vector of questions
-    cout<<"Attempting to load game please wait"<<endl;
+    cout<<"\tAttempting to load game please wait..."<<endl;
     while(inFS>> mathLevel>>leftNumber>> mathSymbol>> rightNumber>> correctAnswer>> attempts) {
         allQuestions.push_back({mathLevel,leftNumber,mathSymbol,rightNumber,correctAnswer,attempts});
     }
@@ -443,11 +443,11 @@ int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
     //if the save file was not read all the way to the end of the file, clear the file's data and throw an exception
     if(!inFS.eof()) {
         allQuestions.clear();
-        throw runtime_error("Could not read the entire file " + FILE_NAME + " for loading");
+        throw runtime_error("\tCould not read the entire file " + FILE_NAME + " for loading\nStarting a new game");
     }
 
     //close the save file and display how many questions were loaded
     inFS.close();
-    cout << allQuestions.size() << " have been loaded from the file" << endl;
+    cout << "\t" << allQuestions.size() << " questions have been loaded from the file" << endl;
     return mathLevel;
 }
