@@ -130,5 +130,5 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions);
  *
  * @return void
  */
-int LoadPreviousGame(string username, vector<vector<int>>&allQuestions);
+int LoadPreviousGame(string username, vector<vector<int>>&allQuestions, int& totalCorrect, int& totalIncorrect);
 #endif //MATHTUTOR_H

@@ -399,12 +399,12 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) 
 }
 
 /**********************************************************************************************************************
-* Attempts to load the game's saved data file. If it doesn't exist, display they are a new user and return from fuction
-* If file exists, load the data from within the file as a vector and return the data.
+* Attempts to load the game's saved data file. If it doesn't exist, display they are a new user and return from function
+* If file exists, load the data from within the file as a vector and return the data if the user wishes.
 * Throw an exception if file fails to load
 * Returns void
 **********************************************************************************************************************/
-int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
+int LoadPreviousGame(string username, vector<vector<int> > &allQuestions, int& totalCorrect, int& totalIncorrect) {
 
     //define the required function variables
     ifstream inFS;                  //for reading data from the save file
@@ -415,9 +415,9 @@ int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
     int mathSymbol          = 0;        //for storing a math question's symbol of operation (addition/subtraction etc.)
     int correctAnswer       = 0;        //for storing the correct answer to a question
     int attempts            = 0;        //for storing the number of attempts it took to answer a question
-    int correctStreak       = 0;        //for determining if the last question saved resulted in the user leveling up
-    int incorrectStreak     = 0;        //for determining if the last question saved resulted in the user leveling down
-    bool answeredCorrectly  = false;
+    totalCorrect            = 0;        //for keeping count of correct answers and passing back to main by reference
+    totalIncorrect          = 0;        //for keeping count of incorrect answers and passing back to main by regference
+    bool answeredCorrectly  = false;    //for storing whether the user got a question in the while loop correct or not
 
     //open the save file
     inFS.open(FILE_NAME);
@@ -429,7 +429,7 @@ int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
     }
 
     //if the save file exists, ask if the user wants to load the previous game
-    userInput = YesNoQuestion("Would you like to load the previous game that was played (y=yes | n=no)?: ");
+    userInput = YesNoQuestion("Would you like to load the previous game that was played? (y=yes | n=no): ");
 
     //if user doesn't want to load the save data, start a new game by returning a beginning math level of 1
     if(userInput == "n" || userInput=="no"){
@@ -442,28 +442,32 @@ int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
     while (inFS >> mathLevel >> leftNumber >> mathSymbol >> rightNumber >> correctAnswer >> attempts) {
         allQuestions.push_back({mathLevel, leftNumber, mathSymbol, rightNumber, correctAnswer, attempts });
 
-        // Determine if user answered the current interaction's question correctly
+        // Determine if user answered the current iteration's question correctly
         answeredCorrectly = (attempts > 0);
 
-        //keep a running tally
+        //keep a running tally of how many questions the user got right/wrong
         if (answeredCorrectly)
-            correctStreak++;
+            totalCorrect++;
         else
-            incorrectStreak++;
+            totalIncorrect++;
 
-        // Level up
-        if (correctStreak == 3) {
+        /*once the user has gotten 3 questions right, perform level up logic and reset tallies to 0
+          this allows the math level returned to accurately reflect the user's progress even if the user doesn't
+          attempt to answer a question at their new level
+        */
+        if (totalCorrect == 3) {
             mathLevel++;
-            correctStreak = 0;
-            incorrectStreak = 0;
+            totalCorrect = 0;
+            totalIncorrect = 0;
         }
 
-        // Level down
-        if (incorrectStreak == 3) {
+        // same as above, but performs level down logic
+        if (totalIncorrect == 3) {
             mathLevel--;
-            if (mathLevel < 1) mathLevel = 1; // keep minimum level 1
-            correctStreak = 0;
-            incorrectStreak = 0;
+            if (mathLevel < 1)
+                mathLevel = 1; // keep minimum level 1 to prevent divide by 0 exceptions
+            totalCorrect = 0;
+            totalIncorrect = 0;
         }
     }
 

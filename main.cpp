@@ -58,7 +58,7 @@ int main() {
     //check if save data exists. If so, ask if the user wishes to load the data or start a new game. If yes, load data
     //catch any runtime errors that occur
     try {
-        mathLevel = LoadPreviousGame(username, allQuestions);
+        mathLevel = LoadPreviousGame(username, allQuestions, totalCorrect, totalIncorrect);
     }
     catch(runtime_error& e) {
         cout<< endl;
