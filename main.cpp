@@ -68,8 +68,7 @@ int main() {
     //keep generating and asking user math questions while they wish to continue with the program as a do/while loop
     do {
         //generate a random math question based on the user's mathLevel and store as a vector
-        vector<int> currentQuestion = GenerateRandomQuestion(mathLevel);
-
+        vector<int> currentQuestion;
         try {
             currentQuestion = GenerateRandomQuestion(mathLevel);
         }

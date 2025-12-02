@@ -407,14 +407,17 @@ void SaveCurrentGame(string username, const vector<vector<int> > &allQuestions) 
 int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
 
     //define the required function variables
-    ifstream inFS;              //for reading data from the save file
-    string userInput    = "?";  //for storing the user's response to yes/no questions
-    int leftNumber      = 0;    //for storing the left number in a math question
-    int rightNumber     = 0;    //for storing the right number in a math question
-    int mathLevel       = 0;    //for storing the user's math level
-    int mathSymbol      = 0;    //for storing a math question's symbol of operation (addition/subtraction etc.)
-    int correctAnswer   = 0;    //for storing the correct answer to a question
-    int attempts        = 0;    //for storing the number of attempts it took to answer a question
+    ifstream inFS;                  //for reading data from the save file
+    string userInput        = "?";      //for storing the user's response to yes/no questions
+    int leftNumber          = 0;        //for storing the left number in a math question
+    int rightNumber         = 0;        //for storing the right number in a math question
+    int mathLevel           = 0;        //for storing the user's math level
+    int mathSymbol          = 0;        //for storing a math question's symbol of operation (addition/subtraction etc.)
+    int correctAnswer       = 0;        //for storing the correct answer to a question
+    int attempts            = 0;        //for storing the number of attempts it took to answer a question
+    int correctStreak       = 0;        //for determining if the last question saved resulted in the user leveling up
+    int incorrectStreak     = 0;        //for determining if the last question saved resulted in the user leveling down
+    bool answeredCorrectly  = false;
 
     //open the save file
     inFS.open(FILE_NAME);
@@ -436,8 +439,32 @@ int LoadPreviousGame(string username, vector<vector<int> > &allQuestions) {
 
     //if user chose to load the save data, read the file one line at a time and append data to vector of questions
     cout<<"\tAttempting to load game please wait..."<<endl;
-    while(inFS>> mathLevel>>leftNumber>> mathSymbol>> rightNumber>> correctAnswer>> attempts) {
-        allQuestions.push_back({mathLevel,leftNumber,mathSymbol,rightNumber,correctAnswer,attempts});
+    while (inFS >> mathLevel >> leftNumber >> mathSymbol >> rightNumber >> correctAnswer >> attempts) {
+        allQuestions.push_back({mathLevel, leftNumber, mathSymbol, rightNumber, correctAnswer, attempts });
+
+        // Determine if user answered the current interaction's question correctly
+        answeredCorrectly = (attempts > 0);
+
+        //keep a running tally
+        if (answeredCorrectly)
+            correctStreak++;
+        else
+            incorrectStreak++;
+
+        // Level up
+        if (correctStreak == 3) {
+            mathLevel++;
+            correctStreak = 0;
+            incorrectStreak = 0;
+        }
+
+        // Level down
+        if (incorrectStreak == 3) {
+            mathLevel--;
+            if (mathLevel < 1) mathLevel = 1; // keep minimum level 1
+            correctStreak = 0;
+            incorrectStreak = 0;
+        }
     }
 
     //if the save file was not read all the way to the end of the file, clear the file's data and throw an exception

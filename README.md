@@ -73,7 +73,9 @@ The purpose of this program is to:
 My name is Digit and I'll be your math tutor!
 What is your name? Ben
 Welcome Ben to the Silly Simple Math Tutor!
-[Level #1] Ben, what is 6 + 1 = 
+Ben, looks like you haven't played this game before good luck on your new game
+
+[Level #1] Ben, what is 10 * 3 = 
 
 ```
 ## Correct Answer
