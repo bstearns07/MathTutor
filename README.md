@@ -1,50 +1,130 @@
-<!-- 
-https://github.com/lifeparticle/Markdown-Cheatsheet
-https://youtu.be/eVGEea7adDM?si=cz1Fbqxr9VgioIEh
--->
-
 # Math Tutor V6
+<p align="center"> <img src="https://img.shields.io/badge/C++-Program-blue?style=flat-square&logo=cplusplus" /> <img src="https://img.shields.io/badge/Leveling-Dynamic-success?style=flat-square" /> <img src="https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square" /> <img src="https://img.shields.io/badge/Focus-Problem%20Solving-orange?style=flat-square" /> </p>
 
-<b>Table of Contents</b>
-- [Summary](#summary)
-- [Screenshots](#screenshots)
-    - [Intro Screen](#intro-screen)
-    - [Correct Answer](#correct-answer)
-    - [Incorrect Answer](#incorrect-answer)
-    - [Level Up](#level-up)
-    - [Level Down](#level-down)
-    - [Final Report](#final-report)
-    - [Loading/Saving Game Progress](#loadingsaving-game-progress)
-    - [Loading Game Error Handling](#loading-game-error-handling)
-- [Maintainers](#maintainers)
+---
 
-# <u>*Summary*</u>
+## 👤 Author
+Ben Stearns - [@bstearns07](https://github.com/bstearns07)
 
-Welcome to Math Tutor Version 6!
---------------------------------
-This is a fun program to test your math skills with some randomly generated math questions.
-Do super well and you can level up to harder problems!
-Be careful though. Get too many wrong and you might level down. Give it a try!
+📅 Last Updated: 12-13-26
 
-How does it work? Here's what this program does:
-The purpose of this program is to:
-- Display a fun welcome banner with funny math jokes
-- Ask for the user's name and greet them
-- Use random generation to produce a math problem for the user to solve
-- Give the user 3 attempts to answer the question correctly
-- Asks if the user wishes to continue after each question
-- Levels up to harder problems after 3 correct answers
-- Levels down to easier problems after 3 incorrect answers if applicable
-- Validates that answers are numeric and if user enters a valid wish to continue
-- Uses vectors to store statistics on each question asked
-- When the player is done playing, a final report is generated with the following:
-    - Displays how the player did on each question
-    - Displays total number of question correct, incorrect, and % correct
-- Necessary program functions are encapsulated into separate header and definition files
-- (new) Support for saving and loading game progress
-    - (new) Saving/Loading game progress is validated through try/catch logic
+---
 
-# <u>*Screenshots*</u>
+## 📑 Table of Contents
+- 📌 [Summary](#-summary)
+- ⭐ [How It Works](#-how-it-works)
+- ✨ [Features](#-features)
+- 🧰 [Tech Stack](#-tech-stack)
+- 🔧 [Development Tools](#-development-tools)
+- 🧩 [Core Concepts](#-core-concepts)
+- 📝 [New Topics Covered](#-new-topics-covered)
+- 📘 [What I Learned](#-what-i-learned)
+- 🖼 [Screenshots](#-screenshots)
+
+---
+
+## 📌 Summary
+
+**Math Tutor V6** is an interactive console-based C++ application designed to help users practice math skills in a fun and engaging way.
+
+The program dynamically generates math problems, tracks user performance, adjusts difficulty levels, and provides a detailed summary report at the end of each session.
+
+It also introduces persistent game state by allowing users to **save and load progress**, making it more realistic and user-friendly.
+
+---
+
+## ⭐ How It Works
+
+1. 🎉 Displays a fun intro with ASCII art and humor  
+2. 👤 Prompts the user for their name  
+3. 💾 Checks for existing saved progress  
+   - Option to **load previous game** or start fresh  
+4. 🔢 Generates random math problems based on difficulty level  
+5. 🎯 Gives the user **3 attempts** per question  
+6. 📈 Tracks performance:
+   - Levels **increase after 3 correct answers**
+   - Levels **decrease after 3 incorrect answers**
+7. 🔁 Prompts the user to continue after each question  
+8. 📊 Displays a **final performance report**  
+9. 💾 Saves progress before exiting  
+
+---
+
+## ✨ Features
+
+- 🎲 Random math problem generation  
+- 🎯 Three-attempt answer system  
+- 📊 Performance tracking (correct / incorrect / percentage)  
+- 📈 Dynamic difficulty scaling (level up / down)  
+- 💾 Save & load game progress  
+- ⚠️ Input validation for numeric answers and user choices  
+- 🧠 Uses vectors to store question history  
+- 🐶 Fun ASCII art and personality  
+
+---
+
+## 🧰 Tech Stack
+
+- ⚙️ **Language:** C++  
+- 📦 **Libraries Used:**
+  - `<iostream>` – input/output  
+  - `<vector>` – dynamic data storage  
+  - `<cstdlib>` / `<ctime>` – random number generation  
+  - `<iomanip>` – formatted output  
+  - `<stdexcept>` – exception handling  
+  - `<windows.h>` – UTF-8 console support  
+
+---
+
+## 🔧 Development Tools
+
+- 💻 Visual Studio / VS Code  
+- 🧪 Windows Console  
+- 🔍 Debugging tools  
+- 🗂 Modular design with:
+  - Header files (`.h`)  
+  - Implementation files (`.cpp`)  
+
+---
+
+## 🧩 Core Concepts
+
+- 🎲 Random number generation with seeding  
+- 🔁 Looping structures (`do/while`)  
+- 📦 Vectors (including **2D vectors**)  
+- 🧠 Conditional logic and state tracking  
+- ⚠️ Exception handling (`try/catch`)  
+- 🧾 File I/O for saving and loading data  
+- 🧩 Modular programming (separation of concerns)  
+
+---
+
+## 📝 New Topics Covered
+
+- 💾 Persistent storage (Save/Load system)  
+- ⚠️ Runtime error handling using exceptions  
+- 🧱 Multi-file program structure  
+- 📊 Advanced data tracking using nested vectors  
+- 🎮 Game-like progression system (leveling logic)  
+
+---
+
+## 📘 What I Learned
+
+This was the culmination of my first college class in C++. I've had plenty of programming experience before this, so I got to take all those skill and apply them to C++. Everything from the basics of variables/math/conditional statements to aspects unique to C++ such as function prototypes, header files, and report generation I learned a lot from this program and had a lot of fun.
+
+Specifics topics learned:
+
+- Designing **interactive console applications**
+- Implementing **data persistence in C++**
+- Structuring programs using **modular architecture**
+- Handling **user input safely and effectively**
+- Building **state-driven logic systems**
+- Creating a more polished **user experience in terminal apps**
+
+---
+
+## 🖼 Screenshots
 
 ## Intro Screen
 ```
